@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:it_lectory_3/pages/theme_lection.dart';
-import 'package:it_lectory_3/widgets/style_text.dart';
+
+import 'package:it_lectory_3/core/theme_lection.dart';
 
 class ListWidget extends StatelessWidget {
   final String namel;
-  final List<String> items;
-  final Function(String) onItemSelected;
+  final Map<String, List<Lecture>> lecturesData;
+  final Function(Lecture) onItemSelected;
 
   const ListWidget({
     super.key,
     required this.namel,
-    required this.items,
+    required this.lecturesData,
     required this.onItemSelected,
+
   });
 
   @override
@@ -36,7 +37,7 @@ class ListWidget extends StatelessWidget {
             ),
             SizedBox(width: 5),
             Expanded(
-              child: Text(namel, style: TextStylesMain.alltxt),
+              child: Text(namel, style: TextStyle(fontSize: 18, color: Colors.white)),
             ),
           ],
         ),
@@ -44,14 +45,14 @@ class ListWidget extends StatelessWidget {
           'assets/images/chevrondown.svg',
           height: 20,
         ),
-        children: items.map((item) {
+        children: lecturesData.keys.map((topic) {
           return GestureDetector(
             onTap: () {
-              onItemSelected(item);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  ThemeLection()),
-              );
+
+              final selectedLecture = lecturesData[topic]?.first;
+              if (selectedLecture != null) {
+                onItemSelected(selectedLecture);
+              }
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 2.5),
@@ -62,7 +63,7 @@ class ListWidget extends StatelessWidget {
                 color: Color.fromRGBO(33, 33, 33, 1.0),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(item, style: TextStylesMain.alltxt),
+              child: Text(topic, style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           );
         }).toList(),

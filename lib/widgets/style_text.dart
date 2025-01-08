@@ -12,6 +12,12 @@ class TextStylesMain{
     fontWeight: FontWeight.w800,
     color: Color.fromRGBO(255, 255, 255, 1),
   );
+  static const TextStyle themetxt= TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 20,
+    fontWeight: FontWeight.w800,
+    color: Color.fromRGBO(255, 255, 255, 1),
+  );
   static const TextStyle alltxt= TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 15,

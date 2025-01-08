@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:it_lectory_3/pages/theme_lection.dart';
+import 'package:it_lectory_3/core/topic-provider.dart';
+import 'package:it_lectory_3/pages/lecture-theme-page.dart';
+import 'package:it_lectory_3/core/theme_lection.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/home_teachers.dart';
 import 'package:it_lectory_3/pages/onboard_1.dart';
@@ -9,14 +11,20 @@ import 'package:it_lectory_3/pages/students.dart';
 import 'package:it_lectory_3/widgets/animated_error.dart';
 import 'package:it_lectory_3/widgets/authrise_switch_widget.dart';
 import 'package:it_lectory_3/widgets/btb_logik.dart';
+
 import 'package:it_lectory_3/widgets/sign_up.dart';
 import 'package:it_lectory_3/widgets/splash.dart';
 import 'package:it_lectory_3/widgets/teacher_signIn.dart';
-
+import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TopicProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -40,7 +48,9 @@ class MyApp extends StatelessWidget {
         '/profile': (context)=> ProfilePage(),
         '/students': (context)=> StudentsPage(),
         '/thm': (context) =>THomeContent(),
-        '/lth':(context)=> ThemeLection(),
+        '/lth': (context) => LectureThemePage(),
+
+
       },
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0, 137, 201, 1),
