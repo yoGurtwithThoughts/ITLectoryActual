@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:it_lectory_3/core/theme_lection.dart';
 
 class ListWidget extends StatelessWidget {
@@ -48,7 +47,6 @@ class ListWidget extends StatelessWidget {
         children: lecturesData.keys.map((topic) {
           return GestureDetector(
             onTap: () {
-
               final selectedLecture = lecturesData[topic]?.first;
               if (selectedLecture != null) {
                 onItemSelected(selectedLecture);

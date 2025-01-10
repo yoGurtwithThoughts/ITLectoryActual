@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it_lectory_3/core/lection_theme_data.dart';
 import 'package:it_lectory_3/core/topic-provider.dart';
 import 'package:it_lectory_3/core/theme_lection.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
@@ -24,43 +25,39 @@ class THomeContent extends StatelessWidget {
               children: [
                 const TitleWidget(title: 'Основы WPF'),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Основы WPF'),
+                _buildLectureList(context, StartWPF, lecturesData),
                 const SizedBox(height: 25),
                 const TitleWidget(title: 'Язык разметки XAML и \nконтейнеры компоновки'),
                 const SizedBox(height: 15),
-                _buildLectureList(context, 'Основы XAML'),
+                _buildLectureList(context, XAMLStart, lecturesData1),
                 const SizedBox(height: 25),
                 const TitleWidget(title: 'Привязка данных и элементы управления'),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Введение в WPF'),
+                _buildLectureList(context, ControlsElement, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Элементы управления (Controls)'),
-                const SizedBox(height: 15),
                 const TitleWidget(title: 'Графика и визуализация'),
                 const SizedBox(height: 15),
-                _buildLectureList(context, 'Введение в WPF'),
+                _buildLectureList(context, Draving, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Рисование и 2D графика'),
+                _buildLectureList(context, Dravingg, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Анимация'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Стили и шаблоны'),
+                _buildLectureList(context, Dravinggg, lecturesData),
                 const SizedBox(height: 25),
                 const TitleWidget(title: 'События и паттерн MVVM'),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Основы событий и их обработка'),
+                _buildLectureList(context, RMVVM, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Паттерн MVVM'),
+                _buildLectureList(context, RMVVMM, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Команды и взаимодействие с пользователем'),
+                _buildLectureList(context, RMVVMMM, lecturesData),
                 const SizedBox(height: 25),
                 const TitleWidget(title: 'Расширенные возможности WPF'),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Работа с мультимедия'),
+                _buildLectureList(context, WPFV, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Документы и печать'),
+                _buildLectureList(context, WPFVc, lecturesData),
                 const SizedBox(height: 25),
-                _buildLectureList(context, 'Оптимизация и производительность'),
+                _buildLectureList(context, WPFVcc, lecturesData),
                 const SizedBox(height: 25),
               ],
             ),
@@ -70,18 +67,24 @@ class THomeContent extends StatelessWidget {
     );
   }
 
-  // Метод для создания списка лекций
-  Widget _buildLectureList(BuildContext context, String lectureName) {
-    return ListWidget(
-      namel: lectureName,
-      lecturesData: lecturesData,
-      onItemSelected: (Lecture selectedLecture) {
-        context.read<TopicProvider>().selectTopic(
-          selectedLecture.title,
-          selectedLecture.content,
+  // Функция для построения списка лекций
+  Widget _buildLectureList(BuildContext context, List<String> topics, Map<String, List<Lecture>> lecturesData) {
+    return Column(
+      children: topics.map((topic) {
+        // Получаем список лекций для данной темы
+        List<Lecture> lectures = lecturesData[topic] ?? []; // Если нет лекций для этой темы, передаем пустой список
+        return ListWidget(
+          namel: topic,
+          lecturesData: lectures, // Передаем список лекций для темы
+          onItemSelected: (Lecture selectedLecture) {
+            context.read<TopicProvider>().selectTopic(
+              selectedLecture.title,
+              selectedLecture.content,
+            );
+            Navigator.pushNamed(context, '/lth');
+          },
         );
-        Navigator.pushNamed(context, '/lth'); // Убедитесь, что у вас есть маршрут с именем '/lth'
-      },
+      }).toList(),
     );
   }
 }

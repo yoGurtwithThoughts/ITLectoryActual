@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
+
 class AppBarWidget extends StatelessWidget {
-  final isBack;
-  final text;
+  final bool isBack;
+  final String text;
+
   const AppBarWidget({
     super.key,
     required this.text,
@@ -11,23 +13,25 @@ class AppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        isBack
-            ? InkWell(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(Icons.arrow_back_ios,color: Color.fromRGBO(0, 85, 150, 1),)
-        )
-            : SizedBox(width: 24),
-        Text(
-          text,
-          style: TextStylesMain.apptxt
-          ),
-        const SizedBox(width: 24),
-      ],
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      leading: isBack
+          ? IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        color: const Color.fromRGBO(0, 85, 150, 1),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+      )
+          : null,
+      title: isBack
+          ? null
+          : Text(
+        text,
+        style: TextStylesMain.apptxt,
+        textAlign: TextAlign.center,
+      ),
+      centerTitle: true,
     );
   }
 }

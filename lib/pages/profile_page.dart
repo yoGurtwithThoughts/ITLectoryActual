@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/profile-image.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,10 +13,24 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String _userName = "Ваше имя"; // Имя пользователя
-  final TextEditingController _nameController = TextEditingController();
+  String _userName = "Ваше имя";
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
 
-  // Метод для редактирования имени
+  Future<void> _loadUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _userName = prefs.getString('userName') ?? "Ваше имя";
+    });
+  }
+
+  Future<void> _saveUserName(String name) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userName', name);
+  }
   void _editName() {
     _nameController.text = _userName;
     showDialog(
@@ -35,10 +50,11 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text("Отмена"),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
                   _userName = _nameController.text;
                 });
+                await _saveUserName(_userName);
                 Navigator.of(context).pop();
               },
               child: const Text("Сохранить"),
@@ -48,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
       },
     );
   }
-
+  final TextEditingController _nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -56,12 +72,12 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           const SizedBox(height: 35),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Распределение элементов
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: AppBarWidget(
                   text: 'Профиль',
-                  isBack: true,
+                  isBack: false,
                 ),
               ),
               InkWell(

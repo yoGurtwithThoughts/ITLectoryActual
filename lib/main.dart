@@ -11,7 +11,7 @@ import 'package:it_lectory_3/pages/students.dart';
 import 'package:it_lectory_3/widgets/animated_error.dart';
 import 'package:it_lectory_3/widgets/authrise_switch_widget.dart';
 import 'package:it_lectory_3/widgets/btb_logik.dart';
-
+import 'package:flutter/services.dart';
 import 'package:it_lectory_3/widgets/sign_up.dart';
 import 'package:it_lectory_3/widgets/splash.dart';
 import 'package:it_lectory_3/widgets/teacher_signIn.dart';
@@ -19,14 +19,16 @@ import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => TopicProvider(),
-      child: MyApp(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => TopicProvider(),
+        child: MyApp(),
+      ),
+    );
+  });
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/splash' ,
+      initialRoute: '/thm' ,
       routes: {
         '/splash': (context)=> SplashScreen(),
         '/er': (context) => PulsatingError(),
