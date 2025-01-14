@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:it_lectory_3/core/theme_lection.dart';
 
 class ListWidget extends StatelessWidget {
@@ -13,9 +12,7 @@ class ListWidget extends StatelessWidget {
     required this.namel,
     required this.lecturesData,
     required this.onItemSelected,
-
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +34,10 @@ class ListWidget extends StatelessWidget {
             ),
             SizedBox(width: 5),
             Expanded(
-              child: Text(namel, style: TextStyle(fontSize: 18, color: Colors.white)),
+              child: Text(
+                namel,
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -48,7 +48,6 @@ class ListWidget extends StatelessWidget {
         children: lecturesData.keys.map((topic) {
           return GestureDetector(
             onTap: () {
-
               final selectedLecture = lecturesData[topic]?.first;
               if (selectedLecture != null) {
                 onItemSelected(selectedLecture);
@@ -63,7 +62,8 @@ class ListWidget extends StatelessWidget {
                 color: Color.fromRGBO(33, 33, 33, 1.0),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(topic, style: TextStyle(fontSize: 16, color: Colors.white)),
+              child: Text(topic,
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           );
         }).toList(),

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/core/lection_theme_data.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
-import 'package:it_lectory_3/pages/exit_method.dart';
 import 'package:it_lectory_3/pages/profile_page.dart';
 import 'package:it_lectory_3/pages/students.dart';
-import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/bottom_bar_view.dart';
 import 'package:it_lectory_3/widgets/btb_logik.dart';
-import 'package:it_lectory_3/widgets/list_theme_widget.dart';
-import 'package:it_lectory_3/widgets/title_widget.dart';
 
-import '../widgets/btb_logik.dart';
 
 class THome extends StatefulWidget {
   @override

@@ -4,7 +4,6 @@ import 'package:it_lectory_3/core/theme_lection.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/list_theme_widget.dart';
 import 'package:provider/provider.dart';
-
 import 'title_widget.dart';
 
 class THomeContent extends StatelessWidget {
@@ -70,7 +69,6 @@ class THomeContent extends StatelessWidget {
     );
   }
 
-  // Метод для создания списка лекций
   Widget _buildLectureList(BuildContext context, String lectureName) {
     return ListWidget(
       namel: lectureName,

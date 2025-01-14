@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:it_lectory_3/core/topic-provider.dart';
 import 'package:it_lectory_3/pages/lecture-theme-page.dart';
-import 'package:it_lectory_3/core/theme_lection.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/home_teachers.dart';
 import 'package:it_lectory_3/pages/onboard_1.dart';
@@ -16,15 +16,16 @@ import 'package:it_lectory_3/widgets/sign_up.dart';
 import 'package:it_lectory_3/widgets/splash.dart';
 import 'package:it_lectory_3/widgets/teacher_signIn.dart';
 import 'package:provider/provider.dart';
-
-
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => TopicProvider(),
-      child: MyApp(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => TopicProvider(),
+        child: MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
