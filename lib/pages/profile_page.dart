@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
+import 'package:it_lectory_3/widgets/infobanner.dart';
 import 'package:it_lectory_3/widgets/profile-image.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String _userName = "Ваше имя";
+
   @override
   void initState() {
     super.initState();
@@ -31,23 +33,39 @@ class _ProfilePageState extends State<ProfilePage> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('userName', name);
   }
+
   void _editName() {
     _nameController.text = _userName;
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Редактировать имя"),
+          backgroundColor: const Color.fromRGBO(45, 45, 45, 1),
+          title: const Text(
+            "Редактировать имя",
+            style: TextStyle(color: Colors.blueAccent),
+          ),
           content: TextField(
             controller: _nameController,
-            decoration: const InputDecoration(hintText: "Введите ваше имя"),
+            decoration: const InputDecoration(
+              hintText: "Введите ваше имя",
+              hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
+              // Hint text color
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.blueAccent),
+              ),
+            ),
+            style: const TextStyle(color: Colors.white),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("Отмена"),
+              child: const Text(
+                "Отмена",
+                style: TextStyle(color: Colors.blueAccent),
+              ),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -57,50 +75,92 @@ class _ProfilePageState extends State<ProfilePage> {
                 await _saveUserName(_userName);
                 Navigator.of(context).pop();
               },
-              child: const Text("Сохранить"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                foregroundColor: Colors.blueAccent,
+                shadowColor: Colors.transparent,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                side: const BorderSide(color: Colors.blueAccent),
+              ),
+              child: const Text(
+                "Сохранить",
+                style: TextStyle(color: Colors.blueAccent),
+              ),
             ),
           ],
         );
       },
     );
   }
+
   final TextEditingController _nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 35),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Stack(
             children: [
-              Expanded(
-                child: AppBarWidget(
+              Center(
+                child: const AppBarWidget(
                   text: 'Профиль',
                   isBack: false,
                 ),
               ),
-              InkWell(
-                onTap: _editName,
-                child: SvgPicture.asset(
-                  'assets/icons/Edit.svg',
-                  height: 50,
-                  width: 50,
+              Positioned(
+                right: 20,
+                top: 0,
+                child: InkWell(
+                  onTap: _editName,
+                  child: SvgPicture.asset(
+                    'assets/icons/Edit.svg',
+                    height: 45,
+                    width: 45,
+                  ),
                 ),
               ),
             ],
           ),
           Column(
             children: [
-              const SizedBox(height: 85),
+              const SizedBox(height: 45),
               UserProfile(),
-              const SizedBox(height: 20),
-              Text(
-                  _userName,
-                  style: TextStylesMain.themetxt
+              const SizedBox(height: 30),
+              Text(_userName, style: TextStylesMain.themetxt),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Преподаватель',
+                    style: TextStylesMain.title,
+                  ),
+                  SizedBox(width: 30),
+                  SvgPicture.asset(
+                    'assets/icons/teacher.svg',
+                    height: 30,
+                    width: 30,
+                  ),
+                ],
+              ),
+             const Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 45, height: 15,),
+                    InfoBanner(
+                      infoTxt: 'AAA',
+                      countInfo: '44',
+                    ),
+                  ],
+                ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

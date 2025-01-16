@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserProfile extends StatefulWidget {
   final double size;
 
-  const UserProfile({Key? key, this.size = 150.0}) : super(key: key);
+  const UserProfile({Key? key, this.size = 100.0}) : super(key: key);
 
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -19,7 +19,7 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
-    _loadImage(); // Загружаем картинку при старте
+    _loadImage();
   }
 
   Future<void> _pickImage() async {
@@ -42,7 +42,8 @@ class _UserProfileState extends State<UserProfile> {
   Future<File?> _saveImage(File image) async {
     try {
       final appDir = await getApplicationDocumentsDirectory();
-      final fileName = 'user_profile_image_${DateTime.now().millisecondsSinceEpoch}.png';
+      final fileName =
+          'user_profile_image_${DateTime.now().millisecondsSinceEpoch}.png';
       final savedImage = await image.copy('${appDir.path}/$fileName');
 
       final prefs = await SharedPreferences.getInstance();
@@ -63,9 +64,8 @@ class _UserProfileState extends State<UserProfile> {
       List<String> imagePaths = prefs.getStringList('profileImages') ?? [];
 
       if (imagePaths.isNotEmpty) {
-        // Загружаем последнее изображение (или первое, в зависимости от логики)
         setState(() {
-          _imageFile = File(imagePaths.last); // Используем последний путь как актуальное изображение
+          _imageFile = File(imagePaths.last);
         });
       }
     } catch (e) {
@@ -73,7 +73,6 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
-  // Метод для удаления изображения
   Future<void> _deleteImage() async {
     final prefs = await SharedPreferences.getInstance();
     List<String> imagePaths = prefs.getStringList('profileImages') ?? [];
@@ -96,21 +95,34 @@ class _UserProfileState extends State<UserProfile> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Удалить изображение?"),
-          content: Text("Вы уверены, что хотите удалить фото профиля?"),
+          backgroundColor: const Color.fromRGBO(45, 45, 45, 1),
+          title: const Text(
+            "Удалить изображение?",
+            style: TextStyle(color: Colors.blueAccent),
+          ),
+          content: const Text(
+            "Вы уверены, что хотите удалить фото профиля?",
+            style: TextStyle(color: Colors.white),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Отмена"),
+              child: const Text(
+                "Отмена",
+                style: TextStyle(color: Colors.blueAccent),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _deleteImage(); // Удаляем изображение
+                _deleteImage();
               },
-              child: Text("Удалить"),
+              child: const Text(
+                "Удалить",
+                style: TextStyle(color: Colors.blueAccent),
+              ),
             ),
           ],
         );
@@ -137,16 +149,16 @@ class _UserProfileState extends State<UserProfile> {
               color: Colors.grey[300],
               child: _imageFile != null
                   ? Image.file(
-                _imageFile!,
-                fit: BoxFit.cover,
-                width: widget.size,
-                height: widget.size,
-              )
+                      _imageFile!,
+                      fit: BoxFit.cover,
+                      width: widget.size,
+                      height: widget.size,
+                    )
                   : Icon(
-                Icons.person,
-                size: widget.size * 0.6,
-                color: Colors.grey[700],
-              ),
+                      Icons.person,
+                      size: widget.size * 0.6,
+                      color: Colors.grey[700],
+                    ),
             ),
           ),
           const SizedBox(height: 10),

@@ -3,101 +3,139 @@ import 'package:it_lectory_3/core/data_user.dart';
 import 'package:it_lectory_3/pages/students/home_page.dart';
 import 'package:it_lectory_3/widgets/all_button.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
+
 class SignUpWidget extends StatefulWidget {
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  final _recordBook1 = TextEditingController();
-
+  final _recordBookController = TextEditingController();
 
   void _login() {
-    final String inputV = _recordBook1.text;
+    final String inputRecordBook = _recordBookController.text;
 
-    if (inputV == rcbook) {
+    if (inputRecordBook == rcbook) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Invalid input value')),
+        const SnackBar(content: Text('Неправильные данные')),
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 55, left: 25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Авторизация', style: TextStylesMain.title),
-                  SizedBox(height: 20),
-                  Form(
-                    child: SizedBox(
-                      height: 50,
-                      width: 355,
-                      child: TextFormField(
-                        controller: _recordBook1,
-                        style: TextStylesMain.labeltxt,
-                        decoration: InputDecoration(
-                          labelStyle: TextStylesMain.labeltxt,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
-                              color: Color.fromRGBO(0, 134, 201, 1),
-                              width: 2.0,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SafeArea(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 55, left: 25, right: 25),
+                          child: Text(
+                            'Авторизация',
+                            style: TextStylesMain.title,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: TextFormField(
+                          controller: _recordBookController,
+                          style: TextStylesMain.labeltxt,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+                            labelStyle: TextStylesMain.labeltxt,
+                            labelText: '№ зачетной книжки',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(0, 134, 201, 1),
+                                width: 2.0,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(0, 134, 201, 1),
+                                width: 2.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(0, 134, 201, 1),
+                                width: 2.0,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Colors.red,
+                                width: 2.0,
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Colors.red,
+                                width: 2.0,
+                              ),
                             ),
                           ),
-                          labelText: '№ зачетки',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
-                              color: Color.fromRGBO(0, 134, 201, 1),
-                              width: 2.0,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Пожалуйста, введите номер зачетной книжки';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                        ),
+                        child: Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(0, 154, 222, 1),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            height: 45,
+                            width: double.infinity,
+                            child: AllButton(
+                              onPressed: _login,
+                              buttonText: 'Авторизоваться',
                             ),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null ||
-                              value.isEmpty) {
-                            return 'Please enter your number of record book';
-                          }
-                          return null;
-                        },
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-            Center(
-              child: Column(
-                children: [
-                const  SizedBox(height: 400),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(0, 154, 222, 1),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    height: 45,
-                    width: 256,
-                    child: AllButton(
-                      onPressed: _login,
-                      buttonText: 'Войти',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
