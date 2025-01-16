@@ -131,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
               UserProfile(),
               const SizedBox(height: 30),
               Text(_userName, style: TextStylesMain.themetxt),
-              SizedBox(height: 15),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -147,14 +147,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
-             const Center(
+             SizedBox(height: 25),
+            Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 45, height: 15,),
+                    SizedBox(width: 45, height: 20),
                     InfoBanner(
-                      infoTxt: 'AAA',
-                      countInfo: '44',
+                      infoTxt: 'группы',
+                      countInfo: '4',
+                    ),
+                    SizedBox(width: 15),
+                    InfoBanner(
+                      infoTxt: 'лекций',
+                      countInfo: '10',
                     ),
                   ],
                 ),

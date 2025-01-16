@@ -11,11 +11,11 @@ import 'package:it_lectory_3/pages/students.dart';
 import 'package:it_lectory_3/widgets/animated_error.dart';
 import 'package:it_lectory_3/widgets/authrise_switch_widget.dart';
 import 'package:it_lectory_3/widgets/btb_logik.dart';
-
 import 'package:it_lectory_3/widgets/sign_up.dart';
 import 'package:it_lectory_3/widgets/splash.dart';
 import 'package:it_lectory_3/widgets/teacher_signIn.dart';
 import 'package:provider/provider.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
@@ -50,8 +50,6 @@ class MyApp extends StatelessWidget {
         '/students': (context)=> StudentsPage(),
         '/thm': (context) =>THomeContent(),
         '/lth': (context) => LectureThemePage(),
-
-
       },
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0, 137, 201, 1),
