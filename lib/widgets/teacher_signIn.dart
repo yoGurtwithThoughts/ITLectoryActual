@@ -27,7 +27,7 @@ class _TeacherInState extends State<TeacherIn> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Invalid input value')),
+        SnackBar(content: Text('Неправильные данные!')),
       );
     }
   }

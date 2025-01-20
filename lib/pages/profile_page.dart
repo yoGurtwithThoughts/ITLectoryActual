@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:it_lectory_3/pages/page_register.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/infobanner.dart';
 import 'package:it_lectory_3/widgets/profile-image.dart';
@@ -102,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 35),
+          const SizedBox(height: 38),
           Stack(
             children: [
               Center(
@@ -112,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Positioned(
-                right: 20,
+                right: 45,
                 top: 0,
                 child: InkWell(
                   onTap: _editName,
@@ -120,6 +121,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     'assets/icons/Edit.svg',
                     height: 45,
                     width: 45,
+                  ),
+                ),
+              ),
+              Positioned(
+                right: 15,
+                top: 10,
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                    );
+                    },
+                  child: SvgPicture.asset(
+                    'assets/images/logout.svg',
+                    height: 25,
+                    width: 25,
                   ),
                 ),
               ),
@@ -165,6 +183,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              Center(
+                child: Column(
+                  children: [
+                    Info(
+                      inf2: 'Уровень\nстудентов',
+                      inf1: '67%',
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ],

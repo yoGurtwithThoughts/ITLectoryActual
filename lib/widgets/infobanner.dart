@@ -68,3 +68,71 @@ class _InfoBannerState extends State<InfoBanner> {
     );
   }
 }
+ class Info extends StatefulWidget {
+  final String inf1;
+  final String inf2;
+   const Info({super.key,
+   required this.inf1,
+   required this.inf2});
+
+   @override
+   State<Info> createState() => _InfoState();
+ }
+
+ class _InfoState extends State<Info> {
+   @override
+   Widget build(BuildContext context) {
+     return ClipRRect(
+       borderRadius: BorderRadius.circular(10),
+       child: Container(
+         width: 300,
+         height: 200,
+         color: Color.fromRGBO(32, 32, 32, 1.0),
+         child: Stack(
+           children: [
+             Positioned(
+               right: 0,
+               top: 0,
+               bottom: 0,
+               child: ClipRRect(
+                 borderRadius: BorderRadius.only(
+                   topRight: Radius.circular(10),
+                   bottomRight: Radius.circular(10),
+                 ),
+                 child: Container(
+                   width: 5,
+                   color: Color.fromRGBO(16, 64, 99, 1),
+                 ),
+               ),
+             ),
+             Positioned(
+               left: 0,
+               right: 0,
+               bottom: 0,
+               child: ClipRRect(
+                 borderRadius: BorderRadius.only(
+                   bottomLeft: Radius.circular(10),
+                   bottomRight: Radius.circular(10),
+                 ),
+                 child: Container(
+                   height: 5,
+                   color: Color.fromRGBO(16, 64, 99, 1),
+                 ),
+               ),
+             ),
+             Center(
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Text(widget.inf1, style: TextStylesMain.apptxt),
+                   Text(widget.inf2, style: TextStylesMain.apptxt),
+                 ],
+               ),
+             )
+           ],
+         ),
+       ),
+     );
+   }
+ }
+

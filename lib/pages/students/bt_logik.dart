@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:it_lectory_3/pages/students/students_profile.dart';
+import 'package:it_lectory_3/pages/students/test_page.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/profile_page.dart';
 import 'package:it_lectory_3/pages/students.dart';
@@ -17,8 +19,8 @@ class _BtlogickState extends State<Btlogick> {
   static  List<Widget> _widgetOptions = <Widget>[
     THomeContent(),
     ChatPage(),
-    ProfilePage(),
-    StudentsPage(),
+    ProfilePageStudent(),
+    TestPage(),
   ];
 
   void _onItemTapped(int index) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/core/databbase_helper.dart';
 import 'package:it_lectory_3/pages/home_teachers.dart';
+import 'package:it_lectory_3/pages/students/bt_logik.dart';
 import 'package:it_lectory_3/widgets/all_button.dart';
 import 'package:it_lectory_3/widgets/nav_text.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
@@ -34,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => THome()),
+        MaterialPageRoute(builder: (context) =>  Btlogick()),
             (Route<dynamic> route) => false,
       );
 

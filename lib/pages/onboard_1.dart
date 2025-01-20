@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/pages/page_register.dart';
-import 'package:it_lectory_3/widgets/authrise_switch_widget.dart';
 import 'package:it_lectory_3/widgets/dinamic_Text.dart';
 import 'package:it_lectory_3/widgets/main_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:it_lectory_3/widgets/nav_text.dart';
 import '../widgets/animatedBilder.dart';
 import '../widgets/hot_navigation_button.dart';

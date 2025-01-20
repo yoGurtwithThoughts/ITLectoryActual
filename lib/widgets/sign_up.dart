@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/core/data_user.dart';
+import 'package:it_lectory_3/pages/home_teachers.dart';
+import 'package:it_lectory_3/pages/students/bt_logik.dart';
 import 'package:it_lectory_3/pages/students/home_page.dart';
 import 'package:it_lectory_3/widgets/all_button.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
@@ -18,7 +20,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     if (inputRecordBook == rcbook) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Btlogick()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -45,7 +47,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     children: [
                       const SafeArea(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 55, left: 25, right: 25),
+                          padding:
+                              EdgeInsets.only(top: 55, left: 25, right: 25),
                           child: Text(
                             'Авторизация',
                             style: TextStylesMain.title,
@@ -61,7 +64,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           style: TextStylesMain.labeltxt,
                           decoration: InputDecoration(
                             isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 18, horizontal: 10),
                             labelStyle: TextStylesMain.labeltxt,
                             labelText: '№ зачетной книжки',
                             border: OutlineInputBorder(

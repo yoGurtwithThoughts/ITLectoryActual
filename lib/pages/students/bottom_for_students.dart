@@ -13,7 +13,7 @@ class BottomBarrs extends StatelessWidget {
   static  List<Widget> _widgetOptions = <Widget>[
     THomeContent(),
     ChatPage(),
-    StProfile(),
+    ProfilePageStudent(),
     TestPage(),
   ];
   @override

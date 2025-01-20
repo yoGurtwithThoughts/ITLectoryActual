@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:it_lectory_3/core/topic-provider.dart';
 import 'package:it_lectory_3/pages/lecture-theme-page.dart';
+import 'package:it_lectory_3/pages/students/home-students.dart';
+import 'package:it_lectory_3/pages/students/test_page.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/home_teachers.dart';
 import 'package:it_lectory_3/pages/onboard_1.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
         '/students': (context)=> StudentsPage(),
         '/thm': (context) =>THomeContent(),
         '/lth': (context) => LectureThemePage(),
+        '/shome': (context) => SHome(),
+         '/test': (context)=> TestPage()
       },
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0, 137, 201, 1),
