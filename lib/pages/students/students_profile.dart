@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:it_lectory_3/pages/page_register.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/profile-image.dart';
+import 'package:it_lectory_3/widgets/sign_up.dart';
 import 'package:it_lectory_3/widgets/students-info-widget.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +16,8 @@ class ProfilePageStudent extends StatefulWidget {
 
 class _ProfilePageStateStudent extends State<ProfilePageStudent> {
   String _userName = "Ваше имя";
+  final TextEditingController _nameController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -79,7 +81,8 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.blueAccent,
                 shadowColor: Colors.transparent,
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 side: const BorderSide(color: Colors.blueAccent),
               ),
               child: const Text(
@@ -88,40 +91,6 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
               ),
             ),
           ],
-        );
-      },
-    );
-  }
-
-  final TextEditingController _nameController = TextEditingController();
-
-  void _showProgressDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.black.withOpacity(0.8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Прогресс: 15%',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                SizedBox(height: 20),
-                CircularProgressIndicator(
-                  value: 0.15,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                ),
-              ],
-            ),
-          ),
         );
       },
     );
@@ -137,7 +106,7 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
           Stack(
             children: [
               Center(
-                child: const AppBarWidget(
+                child:  AppBarWidget(
                   text: 'Профиль',
                   isBack: false,
                 ),
@@ -161,7 +130,7 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                      MaterialPageRoute(builder: (context) => SignUpWidget()),
                     );
                   },
                   child: SvgPicture.asset(
@@ -210,7 +179,7 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
                       onTap: () {
                         Navigator.pushNamed(context, '/test');
                       },
-                      buttonTxt: 'Тест',
+                      buttonTxt: 'Тесты',
                     ),
                   ],
                 ),
@@ -220,5 +189,99 @@ class _ProfilePageStateStudent extends State<ProfilePageStudent> {
         ],
       ),
     );
+  }
+}
+
+void _showProgressDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierColor: Colors.black.withOpacity(0.7),
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            height: 250,
+            width: 250,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(45, 45, 45, 0.65),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Прогресс: 15%',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20),
+                CustomPaint(
+                  size: Size(75, 75),
+                  painter: ProgressPainter(progress: 0.15),
+                ),
+                SizedBox(height: 35),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    Icons.close,
+                    size: 35,
+                    color: Colors.white.withOpacity(0.65),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class ProgressPainter extends CustomPainter {
+  final double progress;
+
+  ProgressPainter({required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint backgroundPaint = Paint()
+      ..color = Color.fromRGBO(45, 45, 45, 0.55) // Цвет границы (серый)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 10;
+
+    final Paint progressPaint = Paint()
+      ..color = Color.fromRGBO(17, 174, 242, 1)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 10;
+
+    canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width / 2,
+        backgroundPaint);
+    double sweepAngle = 2 * 3.14159265359 * progress;
+    canvas.drawArc(
+      Rect.fromCircle(
+          center: Offset(size.width / 2, size.height / 2),
+          radius: size.width / 2),
+      -3.14159265359 / 2,
+      sweepAngle,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

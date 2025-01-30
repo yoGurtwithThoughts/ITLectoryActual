@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:it_lectory_3/core/topic-provider.dart';
+import 'package:it_lectory_3/models/test-provider.dart';
 import 'package:it_lectory_3/pages/lecture-theme-page.dart';
 import 'package:it_lectory_3/pages/students/home-students.dart';
-import 'package:it_lectory_3/pages/students/test_page.dart';
+import 'package:it_lectory_3/pages/students/test-page.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/home_teachers.dart';
 import 'package:it_lectory_3/pages/onboard_1.dart';
@@ -22,8 +23,11 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(
-      ChangeNotifierProvider(
-        create: (context) => TopicProvider(),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => TopicProvider()),
+          ChangeNotifierProvider(create: (_) => TestProvider()),
+        ],
         child: MyApp(),
       ),
     );

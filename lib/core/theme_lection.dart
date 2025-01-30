@@ -1,7 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
-
 class Lecture {
   final String title;
   final String content;

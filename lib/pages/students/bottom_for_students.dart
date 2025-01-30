@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:it_lectory_3/pages/students/test-page.dart';
 import 'package:it_lectory_3/widgets/chats_page.dart';
 import 'package:it_lectory_3/pages/students/students_profile.dart';
-import 'package:it_lectory_3/pages/students/test_page.dart';
 import 'package:it_lectory_3/widgets/bottom_bar.dart';
 import 'package:it_lectory_3/widgets/btb_logik.dart';
 
