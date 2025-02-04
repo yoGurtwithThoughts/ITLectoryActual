@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:it_lectory_3/models/test-provider.dart';
+import 'package:it_lectory_3/core/test-infomation-data.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
 import 'package:it_lectory_3/widgets/test-widget-card.dart'; // Импортируем TestCard
 import 'package:it_lectory_3/models/test-details-page.dart'; // Импортируем TestDetailPage
@@ -19,20 +19,19 @@ class _TestPageState extends State<TestPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppBarWidget(text: 'Тесты', isBack: false),
-            Consumer<TestProvider>(
+            const SizedBox(height: 35),
+            const AppBarWidget(text: 'Тесты', isBack: false),
+            const SizedBox(height: 35),
+            Consumer<WpfTestProvider>(
               builder: (context, testProvider, child) {
                 return Column(
                   children: [
-                    // Loop through all WpfTest objects and create TestCards
                     for (var test in testProvider.wpfTests)
                       TestCard(
                         titleTest: test.title,
-                        Tap: () {
-                          // Select the topic (title and list of tests) in the provider
-                          testProvider.selectTopic(test.title, test.tests);
-
-                          // Navigate to the TestDetailPage
+                        onTap: () {
+                          testProvider.selectTest(
+                              test.title, test.tests); 
                           Navigator.push(
                             context,
                             MaterialPageRoute(

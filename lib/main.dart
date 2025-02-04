@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:it_lectory_3/core/test-infomation-data.dart';
 import 'package:it_lectory_3/core/topic-provider.dart';
 import 'package:it_lectory_3/models/test-provider.dart';
 import 'package:it_lectory_3/pages/lecture-theme-page.dart';
@@ -21,16 +22,16 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => TopicProvider()),
-          ChangeNotifierProvider(create: (_) => TestProvider()),
-        ],
-        child: MyApp(),
-      ),
-    );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TestProvider()),
+        ChangeNotifierProvider(create: (context) => WpfTestProvider()),
+        ChangeNotifierProvider(create: (context) => TopicProvider()),
+      ],
+      child: MyApp(),
+    ));
   });
 }
 
@@ -41,30 +42,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/splash' ,
+      initialRoute: '/splash',
       routes: {
-        '/splash': (context)=> SplashScreen(),
+        '/splash': (context) => SplashScreen(),
         '/er': (context) => PulsatingError(),
-        '/th' : (context)=> THome(),
-        '/onb1': (context)=> OnBoard1(),
-        '/sg' : (context) => SignUpWidget(),
-        '/pagt' : (context) => RegisterPage(),
-        '/logs' :(context) => LoginWidget(),
-        '/sgt': (context)=> TeacherIn(),
-        '/chat': (context)=> ChatPage(),
-        '/profile': (context)=> ProfilePage(),
-        '/students': (context)=> StudentsPage(),
-        '/thm': (context) =>THomeContent(),
+        '/th': (context) => THome(),
+        '/onb1': (context) => OnBoard1(),
+        '/sg': (context) => SignUpWidget(),
+        '/pagt': (context) => RegisterPage(),
+        '/logs': (context) => LoginWidget(),
+        '/sgt': (context) => TeacherIn(),
+        '/chat': (context) => ChatPage(),
+        '/profile': (context) => ProfilePage(),
+        '/students': (context) => StudentsPage(),
+        '/thm': (context) => THomeContent(),
         '/lth': (context) => LectureThemePage(),
         '/shome': (context) => SHome(),
-         '/test': (context)=> TestPage()
+        '/test': (context) => TestPage()
       },
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0, 137, 201, 1),
-        scaffoldBackgroundColor:Color.fromRGBO(21, 21, 21, 1),
-
+        scaffoldBackgroundColor: Color.fromRGBO(21, 21, 21, 1),
       ),
     );
   }
 }
-

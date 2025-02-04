@@ -2,18 +2,15 @@ class Lecture {
   final String title;
   final String content;
   final String imageUrl;
-  Lecture({
-    required this.title,
-    required this.content,
-    required this.imageUrl
-  });
+  Lecture({required this.title, required this.content, required this.imageUrl});
 }
+
 // Темы и лекции
 final Map<String, List<Lecture>> lecturesData = {
   'Что такое WPF?': [
     Lecture(
-      title: 'Что такое WPF?',
-      content: '''\tWPF (Windows Presentation Foundation) — это 
+        title: 'Что такое WPF?',
+        content: '''\tWPF (Windows Presentation Foundation) — это 
 подсистема для создания графических интерфейсов в экосистеме .NET, 
 основанная на DirectX. В отличие от WinForms, где отрисовка элементов 
 управления осуществляется через User32 и GDI+, WPF использует графический процессор,
@@ -23,11 +20,10 @@ WPF использует язык разметки XAML, основанный н
 объявление и код на C#, VB.NET или F#. Первая версия WPF 3.0 была выпущена
 в 2006 году вместе с .NET Framework 3.0 и Windows Vista. С тех пор WPF продолжает 
 развиваться и полностью поддерживается в последней версии .NET 8.''',
-        imageUrl: 'asstes/imagetheme/lg.png'
-    ),
+        imageUrl: 'asstes/imagetheme/lg.png'),
     Lecture(
-      title: 'Архитектура WPF',
-      content: '''WPF (Windows Presentation Foundation) 
+        title: 'Архитектура WPF',
+        content: '''WPF (Windows Presentation Foundation) 
       делится на два уровня: управляемый API и неуправляемый API, 
       который интегрируется с DirectX.
       Управляемый API (Managed API) работает под управлением Common 
@@ -49,20 +45,17 @@ WPF использует язык разметки XAML, основанный н
       Хотя WPF не использует её для рендеринга и визуализации, 
       она продолжает применяться для некоторых вычислительных задач, 
       не связанных с визуализацией.''',
-      imageUrl: 'asstes/imagetheme/lg.png'
-    ),
+        imageUrl: 'asstes/imagetheme/lg.png'),
   ],
   'Язык разметки XAML': [
     Lecture(
-      title: 'Основы XAML',
-      content: 'XAML (Extensible Application Markup Language) — язык ...',
-      imageUrl: 'asstes/imagetheme/lg.png'
-    ),
+        title: 'Основы XAML',
+        content: 'XAML (Extensible Application Markup Language) — язык ...',
+        imageUrl: 'asstes/imagetheme/lg.png'),
     Lecture(
-      title: 'Контейнеры компоновки',
-      content: 'Контейнеры компоновки включают Grid, StackPanel и т.д ...',
+        title: 'Контейнеры компоновки',
+        content: 'Контейнеры компоновки включают Grid, StackPanel и т.д ...',
         imageUrl: 'asstes/imagetheme/lg.png')
-
   ],
   // Добавьте другие категории и лекции по аналогии
 };

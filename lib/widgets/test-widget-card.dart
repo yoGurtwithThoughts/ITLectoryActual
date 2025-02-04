@@ -2,42 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
 
-class TestCard extends StatefulWidget {
+class TestCard extends StatelessWidget {
   final String titleTest;
-  final void Function()? Tap;
+  final void Function()? onTap;
 
-  const TestCard({super.key, required this.titleTest, required this.Tap});
+  const TestCard({super.key, required this.titleTest, required this.onTap});
 
-  @override
-  State<TestCard> createState() => _TestCardState();
-}
-
-class _TestCardState extends State<TestCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.Tap,
+      onTap: onTap,
       child: Container(
-        height: 40,
-        width: 340,
+        height: 70, 
+        width: 365,
+        margin: const EdgeInsets.symmetric(vertical: 10), 
         decoration: BoxDecoration(
-            color: Color.fromRGBO(53, 51, 51, 1),
-            borderRadius: BorderRadius.circular(10)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SvgPicture.asset(
-              'asstes/icons/play.svg',
-              height: 25,
-              width: 25,
+          color: Color.fromRGBO(53, 51, 51, 1),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 4,
+              offset: Offset(0, 2), 
             ),
-            Center(
-              child: Text(
-                widget.titleTest,
-                style: TextStylesMain.themetxt,
-              ),
-            )
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                'assets/icons/play.svg', 
+                height: 30,
+                width: 30,
+              ),
+              const SizedBox(width: 25),
+              Expanded(
+                child: Text(
+                  titleTest,
+                  style: TextStylesMain.themetxt.copyWith(
+                    color: Colors.white, 
+                    fontSize: 16, 
+                  ),
+                  overflow: TextOverflow.ellipsis, 
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

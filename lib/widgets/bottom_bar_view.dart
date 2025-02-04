@@ -12,10 +12,10 @@ final Function(int) onItemTapped;
 
 BottomBarr({required this.selectedIndex, required this.onItemTapped});
 static  List<Widget> _widgetOptions = <Widget>[
-  THomeContent(),
   ChatPage(),
   ProfilePage(),
   StudentsPage(),
+   THomeContent(),
 ];
 @override
 Widget build(BuildContext context) {

@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:it_lectory_3/core/test-infomation-data.dart';
+import 'package:it_lectory_3/core/test-infomation-data.dart'; // Убедитесь, что путь правильный
 
 class TestProvider with ChangeNotifier {
-  String? _selectedTitle;
-  List<Test>? _selectedTests;
+  String? selectedTitle; // Хранит заголовок выбранного теста
+  List<Test>? selectedTests;
+   // Хранит список вопросов выбранного теста
 
-  // Add a getter for wpfTests
-  List<WpfTest> _wpfTests = [
-    // Add your predefined tests here
-  ];
+  // Метод для выбора теста
+ void selectTest(String title, List<Test> tests) {
+  selectedTitle = title;
+  selectedTests = tests;
+  notifyListeners();
+}
 
-  List<WpfTest> get wpfTests => _wpfTests;
+// Добавьте эти переменные в WpfTestProvider
 
-  String? get selectedTitle => _selectedTitle;
-  List<Test>? get selectedTests => _selectedTests;
 
-  void selectTopic(String title, List<Test> tests) {
-    _selectedTitle = title;
-    _selectedTests = tests;
-    notifyListeners();
+  // Метод для сброса выбранного теста
+  void resetSelection() {
+    selectedTitle = null; // Сбрасываем заголовок
+    selectedTests = null; // Сбрасываем список вопросов
+    notifyListeners(); // Уведомляем слушателей об изменении состояния
   }
 }
+

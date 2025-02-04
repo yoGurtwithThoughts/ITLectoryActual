@@ -35,7 +35,7 @@ class _LectureThemePageState extends State<LectureThemePage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TopicProvider>( // Слушаем изменения в TopicProvider
+    return Consumer<TopicProvider>( 
       builder: (context, topicProvider, child) {
         return Scaffold(
           appBar: AppBar(

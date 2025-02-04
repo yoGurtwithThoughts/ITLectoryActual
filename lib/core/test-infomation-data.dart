@@ -165,15 +165,12 @@ class WpfTestProvider with ChangeNotifier {
     ),
   ];
 
-  List<WpfTest> get wpfTests => _wpfTests;
+    List<WpfTest> get wpfTests => _wpfTests;
 
-  WpfTest? getTestByTitle(String title) {
-    try {
-      // Используем firstWhere без orElse, так как исключение будет поймано в случае отсутствия элемента
-      return _wpfTests.firstWhere((test) => test.title == title);
-    } catch (e) {
-      // Возвращаем null, если тест с таким названием не найден
-      return null;
-    }
+  WpfTest? selectedTest;
+
+  void selectTest(String title, List<Test> tests) {
+    selectedTest = WpfTest(title: title, tests: tests);
+    notifyListeners();
   }
 }
