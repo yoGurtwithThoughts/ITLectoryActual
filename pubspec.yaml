@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auto_size_text: ^3.0.0
+  connectivity_plus: ^6.1.2
   file_picker: ^8.0.5
   flutter:
     sdk: flutter
@@ -37,6 +38,7 @@ dependencies:
   html: ^0.15.4
   http: ^1.2.2
   image_picker: ^1.1.2
+  internet_connection_checker: ^3.0.1
   path_provider: ^2.1.4
   provider: ^6.1.2
   sensors_plus: ^1.4.1

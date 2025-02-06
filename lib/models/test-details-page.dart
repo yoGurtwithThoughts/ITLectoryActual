@@ -23,7 +23,7 @@ class TestDetailPage extends StatefulWidget {
 class _TestDetailPageState extends State<TestDetailPage> {
   List<int?> selectedAnswers = [];
   List<bool> isAnswered =
-      []; // Список для отслеживания, был ли уже ответ на вопрос
+      [];
 
   @override
   void initState() {
@@ -146,7 +146,6 @@ class _TestDetailPageState extends State<TestDetailPage> {
                           children: test.answers.asMap().entries.map((entry) {
                             int answerIndex = entry.key;
                             String answer = entry.value;
-
                             return AnswerButton(
                               answer: answer,
                               isSelected: selectedAnswers[index] == answerIndex,
@@ -156,15 +155,12 @@ class _TestDetailPageState extends State<TestDetailPage> {
                               onTap: () {
                                 setState(() {
                                   if (!isAnswered[index]) {
-                                    // Разрешаем ответить только один раз
                                     selectedAnswers[index] = answerIndex;
-                                    isAnswered[index] =
-                                        true; // Отметим, что на вопрос ответили
+                                    isAnswered[index] = true;
                                   }
                                 });
                               },
-                              isAnswered: isAnswered[
-                                  index], // Передаем флаг, что на вопрос уже ответили
+                              isAnswered: isAnswered[index],
                             );
                           }).toList(),
                         ),
@@ -179,7 +175,7 @@ class _TestDetailPageState extends State<TestDetailPage> {
             padding: const EdgeInsets.all(16.0),
             child: SizedBox(
               width:
-                  340, // Устанавливаем ширину кнопки на 100% от родительского контейнера
+                  340, 
               child: ElevatedButton(
                 onPressed: () {
                   _showResultDialog(context);
@@ -187,13 +183,13 @@ class _TestDetailPageState extends State<TestDetailPage> {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor:
-                      Color.fromRGBO(0, 162, 225, 1), // Цвет фона кнопки
+                      Color.fromRGBO(0, 162, 225, 1), 
                   padding: EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 15), // Внутренние отступы
+                      vertical: 12, horizontal: 15), 
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // Закругленные углы
+                    borderRadius: BorderRadius.circular(8), 
                   ),
-                  elevation: 5, // Тень кнопки
+                  elevation: 5, 
                 ),
                 child: Text(
                   'Проверить',
