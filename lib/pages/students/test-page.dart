@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:it_lectory_3/core/test-infomation-data.dart';
 import 'package:it_lectory_3/widgets/appbar_widget.dart';
-import 'package:it_lectory_3/widgets/test-widget-card.dart'; // Импортируем TestCard
-import 'package:it_lectory_3/models/test-details-page.dart'; // Импортируем TestDetailPage
+import 'package:it_lectory_3/widgets/test-widget-card.dart'; 
+import 'package:it_lectory_3/models/test-details-page.dart'; 
 import 'package:provider/provider.dart';
 
 class TestPage extends StatefulWidget {

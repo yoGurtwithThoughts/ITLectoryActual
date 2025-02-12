@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:it_lectory_3/widgets/style_text.dart';
 
 class AnswerButton extends StatefulWidget {
-  final String answer; // The answer text
-  final bool isSelected; // Whether this button is selected
-  final bool isCorrect; // Whether this answer is correct
-  final VoidCallback onTap; // Callback function when tapped
-  final bool isAnswered; // Flag to track if the question has already been answered
+  final String answer;
+  final bool isSelected; 
+  final bool isCorrect; 
+  final VoidCallback onTap; 
+  final bool isAnswered; 
 
   AnswerButton({
     required this.answer,
     required this.isSelected,
     required this.isCorrect,
     required this.onTap,
-    required this.isAnswered, // New parameter to check if the question has been answered
+    required this.isAnswered, 
   });
 
   @override
@@ -21,9 +21,9 @@ class AnswerButton extends StatefulWidget {
 }
 
 class _AnswerButtonState extends State<AnswerButton> with SingleTickerProviderStateMixin {
-  late AnimationController _controller; // Animation controller for scaling effect
-  late Animation<double> _scaleAnimation; // Scale animation
-  bool _isTapped = false; // Track if the button has been tapped
+  late AnimationController _controller; 
+  late Animation<double> _scaleAnimation;
+  bool _isTapped = false; 
 
   @override
   void initState() {
@@ -36,15 +36,15 @@ class _AnswerButtonState extends State<AnswerButton> with SingleTickerProviderSt
 
   void _handleTap() {
     if (widget.isAnswered) {
-      return; // Prevent double answering
+      return; 
     }
 
     _controller.forward().then((_) {
       setState(() {
-        _isTapped = true; // Mark the button as tapped
+        _isTapped = true; 
       });
-      widget.onTap(); // Call the onTap callback
-      _controller.reverse(); // Reverse the animation
+      widget.onTap(); 
+      _controller.reverse(); 
     });
   }
 
@@ -53,31 +53,30 @@ class _AnswerButtonState extends State<AnswerButton> with SingleTickerProviderSt
     Color buttonColor;
     IconData? iconData;
 
-    // Determine button color and icon based on selection and correctness
     if (widget.isSelected) {
       if (widget.isCorrect) {
-        buttonColor = Colors.green; // Correct answer color
-        iconData = Icons.check; // Check icon for correct answer
+        buttonColor = Colors.green; 
+        iconData = Icons.check; 
       } else {
-        buttonColor = Colors.red; // Incorrect answer color
-        iconData = Icons.close; // Cross icon for incorrect answer
+        buttonColor = Colors.red;
+        iconData = Icons.close; 
       }
     } else {
-      buttonColor = Colors.transparent; // Transparent when not selected
-      iconData = null; // No icon when not selected
+      buttonColor = Colors.transparent; 
+      iconData = null; 
     }
 
     return ScaleTransition(
-      scale: _scaleAnimation, // Apply scale animation
+      scale: _scaleAnimation, 
       child: GestureDetector(
-        onTap: _handleTap, // Handle tap event
+        onTap: _handleTap, 
         child: Container(
           padding: EdgeInsets.all(16),
-          margin: EdgeInsets.only(bottom: 8), // Add spacing between buttons
+          margin: EdgeInsets.only(bottom: 8), 
           decoration: BoxDecoration(
-            color: buttonColor, // Set background color based on selection state
-            borderRadius: BorderRadius.circular(8), // Rounded corners
-            border: Border.all(color: Colors.blue), // Blue border for all buttons
+            color: buttonColor, 
+            borderRadius: BorderRadius.circular(8), 
+            border: Border.all(color: Colors.blue), 
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,13 +84,13 @@ class _AnswerButtonState extends State<AnswerButton> with SingleTickerProviderSt
               Expanded(
                 child: Text(
                   widget.answer,
-                  style: _isTapped ? TextStylesMain.alltxt : TextStylesMain.chattxt, // Change style based on tap state
+                  style: _isTapped ? TextStylesMain.alltxt : TextStylesMain.chattxt,
                 ),
               ),
               if (iconData != null)
                 Icon(
                   iconData,
-                  color: Colors.black, // Icon color set to black for visibility
+                  color: Colors.black, 
                 ),
             ],
           ),
@@ -102,7 +101,7 @@ class _AnswerButtonState extends State<AnswerButton> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    _controller.dispose(); // Dispose of the animation controller
+    _controller.dispose(); 
     super.dispose();
   }
 }

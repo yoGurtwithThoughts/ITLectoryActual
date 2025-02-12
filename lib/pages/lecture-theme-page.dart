@@ -6,7 +6,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class LectureThemePage extends StatefulWidget {
   final bool isBack;
+
   const LectureThemePage({Key? key, this.isBack = true}) : super(key: key);
+
   @override
   _LectureThemePageState createState() => _LectureThemePageState();
 }
@@ -35,24 +37,26 @@ class _LectureThemePageState extends State<LectureThemePage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TopicProvider>( 
+    return Consumer<TopicProvider>(
       builder: (context, topicProvider, child) {
+        final selectedTitle = topicProvider.selectedLecture?.title ?? 'Тема';
+        final selectedContent = topicProvider.selectedLecture?.content ?? '';
+
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              topicProvider.selectedTitle ?? 'Тема',
+              selectedTitle,
               style: TextStylesMain.buttontxt,
               textAlign: TextAlign.center,
             ),
             leading: widget.isBack
-                ? InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-                child: Icon(Icons.arrow_back_ios,color: Color.fromRGBO(0, 85, 150, 1),)
-            )
+                ? IconButton(
+                    icon: Icon(Icons.arrow_back_ios,
+                        color: Color.fromRGBO(0, 85, 150, 1)),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
                 : SizedBox(width: 24),
           ),
           body: Padding(
@@ -63,7 +67,7 @@ class _LectureThemePageState extends State<LectureThemePage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  _buildContent(topicProvider.selectedContent),
+                  _buildContent(selectedContent),
                 ],
               ),
             ),
@@ -73,18 +77,16 @@ class _LectureThemePageState extends State<LectureThemePage>
     );
   }
 
-  Widget _buildContent(String? content) {
-    return FadeTransition(
-      opacity: _animation, // Плавный переход
-      child: Container(
-        width: double.infinity,
-        child: AutoSizeText(
-          content ?? '', // Контент для отображения
-          style: TextStylesMain.themetxt,
-          textAlign: TextAlign.justify,
-          maxLines: 450, // Ограничение по строкам
-          overflow: TextOverflow.clip, // Поведение текста при переполнении
-        ),
+  Widget _buildContent(String content) {
+    return AnimatedOpacity(
+      opacity: _animation.value, // Плавное появление контента
+      duration: const Duration(seconds: 1),
+      child: AutoSizeText(
+        content.isEmpty ? 'Контент недоступен' : content, // Обработка пустого контента
+        style: TextStylesMain.themetxt,
+        textAlign: TextAlign.justify,
+        maxLines: 450, // Ограничение по строкам
+        overflow: TextOverflow.clip, // Поведение текста при переполнении
       ),
     );
   }

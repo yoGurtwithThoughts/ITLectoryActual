@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:it_lectory_3/core/theme_lection.dart';
 
 class TopicProvider with ChangeNotifier {
-  String? selectedTitle;
-  String? selectedContent;
+  Lecture? _selectedLecture;
 
+  Lecture? get selectedLecture => _selectedLecture;
 
+  void selectLecture(Lecture lecture) {
+    _selectedLecture = lecture;
+    notifyListeners(); // Уведомляем слушателей об изменении
+  }
 
-  void selectTopic(String title, String content) {
-    selectedTitle = title;
-    selectedContent = content;
+  void resetSelection() {
+    _selectedLecture = null;
     notifyListeners();
   }
 }

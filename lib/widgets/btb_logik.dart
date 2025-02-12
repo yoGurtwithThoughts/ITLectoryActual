@@ -1,67 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:it_lectory_3/core/topic-provider.dart';
 import 'package:it_lectory_3/core/theme_lection.dart';
-import 'package:it_lectory_3/widgets/appbar_widget.dart';
-import 'package:it_lectory_3/widgets/list_theme_widget.dart';
+import 'package:it_lectory_3/core/topic-provider.dart';
+import 'package:it_lectory_3/models/category.dart'; // Модель Category
 import 'package:provider/provider.dart';
-import 'title_widget.dart';
+import 'package:it_lectory_3/widgets/appbar_widget.dart'; //AppBarWidget
+import 'package:it_lectory_3/widgets/list_theme_widget.dart'; //ListWidget
+import 'package:it_lectory_3/widgets/title_widget.dart'; //TitleWidget
 
 class THomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Выровнять все элементы по левому краю
         children: [
-          const SizedBox(height: 35),
+          const SizedBox(height: 35), // Отступ сверху
           const AppBarWidget(
-            text: 'Введение в WPF',
-            isBack: false,
+            text: 'Введение в WPF', // Заголовок страницы
+            isBack: false, // Без кнопки "назад"
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 35),
+            padding: const EdgeInsets.only(
+                left: 10, top: 35), // Отступы слева и сверху
             child: Column(
-              children: [
-                const TitleWidget(title: 'Основы WPF'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Основы WPF'),
-                const SizedBox(height: 25),
-                const TitleWidget(title: 'Язык разметки XAML и \nконтейнеры компоновки'),
-                const SizedBox(height: 15),
-                _buildLectureList(context, 'Основы XAML'),
-                const SizedBox(height: 25),
-                const TitleWidget(title: 'Привязка данных и элементы управления'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Введение в WPF'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Элементы управления (Controls)'),
-                const SizedBox(height: 15),
-                const TitleWidget(title: 'Графика и визуализация'),
-                const SizedBox(height: 15),
-                _buildLectureList(context, 'Введение в WPF'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Рисование и 2D графика'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Анимация'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Стили и шаблоны'),
-                const SizedBox(height: 25),
-                const TitleWidget(title: 'События и паттерн MVVM'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Основы событий и их обработка'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Паттерн MVVM'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Команды и взаимодействие с пользователем'),
-                const SizedBox(height: 25),
-                const TitleWidget(title: 'Расширенные возможности WPF'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Работа с мультимедия'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Документы и печать'),
-                const SizedBox(height: 25),
-                _buildLectureList(context, 'Оптимизация и производительность'),
-                const SizedBox(height: 25),
-              ],
+              crossAxisAlignment: CrossAxisAlignment
+                  .center, 
+              children: categories
+                  .map((category) => _buildCategory(context, category))
+                  .toList(),
             ),
           ),
         ],
@@ -69,17 +36,25 @@ class THomeContent extends StatelessWidget {
     );
   }
 
-  Widget _buildLectureList(BuildContext context, String lectureName) {
-    return ListWidget(
-      namel: lectureName,
-      lecturesData: lecturesData,
-      onItemSelected: (Lecture selectedLecture) {
-        context.read<TopicProvider>().selectTopic(
-          selectedLecture.title,
-          selectedLecture.content,
-        );
-        Navigator.pushNamed(context, '/lth'); // Убедитесь, что у вас есть маршрут с именем '/lth'
-      },
+  /// Функция для создания секции категории с заголовком и списком лекций
+  Widget _buildCategory(BuildContext context, Category category) {
+    return Column(
+      crossAxisAlignment:
+          CrossAxisAlignment.start, // Выровнять элементы по левому краю
+      children: [
+        TitleWidget(title: category.title), // Вывод заголовка категории
+        const SizedBox(height: 25), // Пробел между заголовком и списком лекций
+        ListWidget(
+          namel: category.title,
+          lecturesData: category.lectures, // Теперь тип совпадает
+          onItemSelected: (Lecture selectedLecture) {
+            context.read<TopicProvider>().selectLecture(selectedLecture);
+            Navigator.pushNamed(context, '/lth');
+          },
+        ),
+
+        const SizedBox(height: 25), // Пробел между категориями
+      ],
     );
   }
 }

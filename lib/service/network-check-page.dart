@@ -14,7 +14,7 @@ class _CheckNetWorkState extends State<CheckNetWork>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  bool _isChecking = false; // Флаг проверки соединения
+  bool _isChecking = false; 
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ class _CheckNetWorkState extends State<CheckNetWork>
           ),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: 40.0), // Отступ от нижнего края
+                const EdgeInsets.only(bottom: 40.0),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
